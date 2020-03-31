@@ -2,10 +2,14 @@ import { Schema } from 'mongoose';
 
 export const UserSchema: Schema = new Schema(
   {
-    fullname: String,
+    fullname: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       unique: true,
+      required: true,
     },
   },
   {
