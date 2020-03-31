@@ -1,12 +1,11 @@
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import { ValidationPipe } from '@nestjs/common';
-import { ServerExceptionFilter } from '../exceptions/filters/server-exception.filter';
+import { AllExceptionsFilter } from '../exceptions/filters/all-exceptions.filter';
 
 export function init(app) {
-
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new ServerExceptionFilter());
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.use(compression());
   // sets secure headers globally

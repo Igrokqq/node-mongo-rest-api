@@ -7,7 +7,7 @@ async function bootstrap() {
 
   middleware.init(app);
 
-  await app.listen(process.env.SERVER_PORT);
+  await app.listen(process.env.SERVER_PORT || 3000);
 }
 
 bootstrap();
