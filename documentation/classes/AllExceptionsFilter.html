@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-functions">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -40,84 +40,100 @@
 
 
 
-
-
-
-                   
-
 <ol class="breadcrumb">
-  <li>Miscellaneous</li>
-  <li>Functions</li>
+  <li>Classes</li>
+  <li>AllExceptionsFilter</li>
 </ol>
 
-<section>
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/exceptions/filters/all-exceptions.filter.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>ExceptionFilter</code>
+            </p>
+
+
+            <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#bootstrap" title="src/main.ts"><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../main.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#init" title="src/config/middleware.ts"><b>init</b>&nbsp;&nbsp;&nbsp;(src/.../middleware.ts)</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#catch">catch</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
         </tbody>
     </table>
 </section>
 
-    <h3>src/main.ts</h3>
-    <section>
-    <h3></h3>    <table class="table table-sm table-bordered">
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="bootstrap"></a>
+                    <a name="catch"></a>
                     <span class="name">
                         <b>
-                            bootstrap
+                            catch
                         </b>
-                        <a href="#bootstrap"><span class="icon ion-ios-link"></span></a>
+                        <a href="#catch"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>bootstrap()</code>
+<code>catch(exception: unknown, host: ArgumentsHost)</code>
                 </td>
             </tr>
 
 
-
-
-        </tbody>
-    </table>
-</section>    <h3>src/config/middleware.ts</h3>
-    <section>
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="init"></a>
-                    <span class="name">
-                        <b>
-                            init
-                        </b>
-                        <a href="#init"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-line">Defined in <a href="" data-line="12"
+                            class="link-to-prism">src/exceptions/filters/all-exceptions.filter.ts:12</a></div>
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-4">
-<code>init(app)</code>
-                </td>
-            </tr>
-
-
 
 
             <tr>
@@ -129,12 +145,28 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>app</td>
+                                    <td>exception</td>
+                                    <td>
+                                            <code>unknown</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>host</td>
+                                    <td>
+                                            <code>ArgumentsHost</code>
+                                    </td>
 
                                     <td>
                                         No
@@ -147,11 +179,68 @@
                     </div>
                     <div>
                     </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  HttpException,
+  HttpStatus,
+} from &#x27;@nestjs/common&#x27;;
+import { Response } from &#x27;express&#x27;;
+
+@Catch()
+export class AllExceptionsFilter implements ExceptionFilter {
+  catch(exception: unknown, host: ArgumentsHost) {
+    const ctx &#x3D; host.switchToHttp();
+    const res &#x3D; ctx.getResponse&lt;Response&gt;();
+
+    const status &#x3D;
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    if (status &#x3D;&#x3D; 400) {
+      return res
+        .status(status)
+        .json(exception[&#x27;response&#x27;])
+    }
+
+    return res.status(500).json({
+      statusCode: status,
+      message: exception[&#x27;errmsg&#x27;],
+    });
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
 
 
                    </div><div class="search-results">
@@ -170,8 +259,8 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-functions';
-            var COMPODOC_CURRENT_PAGE_URL = 'functions.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'AllExceptionsFilter.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
