@@ -10,7 +10,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new ServerExceptionFilter());
 
-  app.use(compression);
+  app.use(compression());
 
   await app.listen(process.env.SERVER_PORT);
 }
