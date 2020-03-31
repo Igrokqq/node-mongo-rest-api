@@ -1,3 +1,4 @@
+import * as compression from 'compression';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './components/app/app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -8,6 +9,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new ServerExceptionFilter());
+
+  app.use(compression);
 
   await app.listen(process.env.SERVER_PORT);
 }
