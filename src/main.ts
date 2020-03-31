@@ -1,4 +1,5 @@
 import * as compression from 'compression';
+import * as helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './components/app/app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -11,6 +12,10 @@ async function bootstrap() {
   app.useGlobalFilters(new ServerExceptionFilter());
 
   app.use(compression());
+  // sets secure headers globally
+  app.use(helmet());
+  // enables cors requests to our api
+  app.enableCors();
 
   await app.listen(process.env.SERVER_PORT);
 }
