@@ -28,6 +28,6 @@ module.exports = {
   },
 
   async down(db, client) {
-    return await db.collection('books').drop();
+    return await db.collection('users').drop();
   }
 };
